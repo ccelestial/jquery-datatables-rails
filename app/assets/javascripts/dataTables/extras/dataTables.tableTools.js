@@ -2427,7 +2427,7 @@ TableTools.prototype = {
 
 			// If the table redraws while in print view, the DataTables scrolling
 			// setup would hide the header, so we need to readd it on draw
-			$(this.s.dt.nTable).bind('draw.DTTT_Print', function () {
+			$(this.s.dt.nTable).on('draw.DTTT_Print', function () {
 				that._fnPrintScrollStart( oSetDT );
 			} );
 		}
@@ -2474,7 +2474,7 @@ TableTools.prototype = {
 		/* Bind a key event listener to the document for the escape key -
 		 * it is removed in the callback
 		 */
-		$(document).bind( "keydown.DTTT", function(e) {
+		$(document).on( "keydown.DTTT", function(e) {
 			/* Only interested in the escape key */
 			if ( e.keyCode == 27 )
 			{
@@ -2505,7 +2505,7 @@ TableTools.prototype = {
 		/* Restore DataTables' scrolling */
 		if ( oSetDT.oScroll.sX !== "" || oSetDT.oScroll.sY !== "" )
 		{
-			$(this.s.dt.nTable).unbind('draw.DTTT_Print');
+			$(this.s.dt.nTable).off('draw.DTTT_Print');
 
 			this._fnPrintScrollEnd();
 		}
@@ -2527,7 +2527,7 @@ TableTools.prototype = {
 		}
 		oSetDT.oApi._fnDraw( oSetDT );
 
-		$(document).unbind( "keydown.DTTT" );
+		$(document).off( "keydown.DTTT" );
 	},
 
 

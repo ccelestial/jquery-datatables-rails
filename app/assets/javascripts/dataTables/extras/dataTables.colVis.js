@@ -259,7 +259,7 @@ ColVis.prototype = {
 					"ColVis_Button ColVis_MasterButton ui-button ui-state-default"
 			} )
 			.append( '<span>'+this.s.buttonText+'</span>' )
-			.bind( this.s.activate=="mouseover" ? "mouseover" : "click", function (e) {
+			.on( this.s.activate=="mouseover" ? "mouseover" : "click", function (e) {
 				e.preventDefault();
 				that._fnCollectionShow();
 			} )
@@ -289,7 +289,7 @@ ColVis.prototype = {
 		/* If columns are reordered, then we need to update our exclude list and
 		 * rebuild the displayed list
 		 */
-		$(this.s.dt.oInstance).bind( 'column-reorder.dt', function ( e, oSettings, oReorder ) {
+		$(this.s.dt.oInstance).on( 'column-reorder.dt', function ( e, oSettings, oReorder ) {
 			for ( i=0, iLen=that.s.aiExclude.length ; i<iLen ; i++ ) {
 				that.s.aiExclude[i] = oReorder.aiInvertMapping[ that.s.aiExclude[i] ];
 			}
@@ -300,7 +300,7 @@ ColVis.prototype = {
 			that.fnRebuild();
 		} );
 
-		$(this.s.dt.oInstance).bind( 'destroy.dt', function () {
+		$(this.s.dt.oInstance).on( 'destroy.dt', function () {
 			$(that.dom.wrapper).remove();
 		} );
 
